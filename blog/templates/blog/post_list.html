@@ -1,31 +1,11 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Django Girls Blog</title>
-    <body>
-        <header>
-           <h1><a href="/">Django Girls Blog</a></h1>
-        </header>
-        <article>
-            <time>published:14.06.2014,12:14</timetime>
-            <h2><a href=""></a>My First Post</h2>
-            <p>Joe Biden is the 46th president of the United States (2021– ). Biden was born on November 20, 1942, in Scranton, Pennsylvania. He has a bachelor’s degree from the University of Delaware and a law degree from Syracuse University.When was Joe Biden elected to the U.S. Senate?Joe Biden was elected to represent Delaware in the U.S. Senate in 1972 at the age of 29, becoming the fifth youngest senator in U.S. history. He remained a senator until 2009.</p>
+{% extends 'blog/base.html' %}
+{% block content %}
+    {% for post in posts %}
+        <article  class="post">
+            <time class="date"> {{ post.published_date }}</time>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
         </article>
-        <article>
-            <time>published:14.06.2014,09:14</timetime>
-            <h2><a href=""></a> Second Post</h2>
-            <p>Big data primarily refers to data sets that are too large or complex to be dealt with by traditional data-processing application software. Data with many entries (rows) offer greater statistical power, while data with higher complexity (more attributes or columns) may lead to a higher false discovery rate.[2] Though used sometimes loosely partly due to a lack of formal definition, the best interpretation is that it is a large body of information that cannot be comprehended when used in small amounts only.[3]</p>
-        </article>
-
-        
-        {% for post in posts %}
-           <article>
-              <time>published: {{ post.published_date }}</time>
-              <h2><a href="">{{ post.title }}</a></h2>
-              <p>{{ post.text|linebreaksbr }}</p>
-            </article>
-        {% endfor %}
-
-    
-    </body>
-</html>
+    {% endfor %}
+{% endblock %}
+                        
